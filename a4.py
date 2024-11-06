@@ -9,9 +9,44 @@ class TTTBoard:
         board - a list of '*'s, 'X's & 'O's. 'X's represent moves by player 'X', 'O's
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
-
-    pass
-
+    def __init__(self):
+        self.board = ["*","*","*","*","*","*","*","*","*"]
+    def __str__(self):
+        return " ".join(self.board[0:3] + "\n" + " ".join(self.board[3:6])+"\n" + " ".join9self.board[6:9])
+    def make_move(self, player, pos):
+        if pos < len(self.board):
+            if self.board[pos] == "*":
+                self.board[pos]=player
+                return True
+        return False
+    def has_won(self, player):
+        if self.board[0:3] == [player,player,player]:
+            return True
+        if self.board[3:6] == [player,player,player]:
+            return True
+        if self.board[6:9] == [player,player,player]:
+            return True
+        if self.board[0::3] == [player,player,player]:
+            return True
+        if self.board[0::3] == [player,player,player]:
+            return True
+        if self.board[1::3] == [player,player,player]:
+            return True
+        if self.board[2::3] == [player,player,player]:
+            return True
+        if [self.board[0],self.board[4],self.board[8]]==[player,player,player]:
+            return True
+        if [self.board[2],self.board[4],self.board[6]]==[player,player,player]:
+            return True
+        return False
+    def game_over(self):
+        if not("*" in self.board):
+            return True
+        if self.has_won("X") or self.has_won("O"):
+            return True
+        return False
+    def clear(self):
+        self.board = ["*","*","*","*","*","*","*","*","*"]
 
 def play_tic_tac_toe() -> None:
     """Uses your class to play TicTacToe"""
